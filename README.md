@@ -11,4 +11,12 @@ http://nlp.stanford.edu/~socherr/pa4-ner.zip
 
 Stanford NLP class cs224: http://www.stanford.edu/class/cs224n/syllabus.html#lec14
 
+Two course slides are here:
+http://www.stanford.edu/class/cs224n/handouts/CS224N_DeepNLP_lecture1.pdf
+http://www.stanford.edu/class/cs224n/handouts/CS224N_DeepNLP_Week7_lecture2.pdf
 
+The topic was covered in the above NAACL 2013 Presentation. 
+Video1: http://techtalks.tv/talks/deep-learning-for-nlp-without-magic-part-1/58414/
+Video2: http://techtalks.tv/talks/deep-learning-for-nlp-without-magic-part-2/58415/
+
+The same tutorial was also on youtube (lower quality): http://www.youtube.com/watch?v=IF5tGEgRCTQ
