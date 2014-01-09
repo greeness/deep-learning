@@ -1,7 +1,7 @@
-deep-learning-ner
+Deep Learning Resources
 =================
 
-Unofficial fork of Stanford CS224N PA4 (Deep Learning Sequence Model)
+== Stanford CS224N PA4 (Deep Learning Sequence Model)
 
 http://nlp.stanford.edu/courses/NAACL2013/
 
