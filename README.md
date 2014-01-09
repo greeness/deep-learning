@@ -22,20 +22,20 @@ The topic was covered in the above NAACL 2013 Presentation.
 The same tutorial was also on youtube (lower quality): http://www.youtube.com/watch?v=IF5tGEgRCTQ
 
 
-## yb tricks 
+## Training tricks 
 http://www.iro.umontreal.ca/~bengioy/papers/YB-tricks.pdf
 
-## survey
+## Survey
 http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf
 
-## geofrrey hinton's cousera course
+## Geoff Hinton's cousera course
 * https://class.coursera.org/neuralnets-2012-001/lecture
 
-## socher tutorial @NAACL'13
+## Socher tutorial @NAACL'13
 * http://www.socher.org/index.php/DeepLearningTutorial/DeepLearningTutorial
 * http://nlp.stanford.edu/courses/NAACL2013/
 
-## ufldl wiki (andrew ng class)
+## UFLDL wiki (Andrew Ng's class)
 * http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Tutorial
 * http://www.stanford.edu/class/cs294a/info.html
 
