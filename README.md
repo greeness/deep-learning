@@ -22,21 +22,25 @@ Video2: http://techtalks.tv/talks/deep-learning-for-nlp-without-magic-part-2/584
 The same tutorial was also on youtube (lower quality): http://www.youtube.com/watch?v=IF5tGEgRCTQ
 
 
-# yb tricks: http://www.iro.umontreal.ca/~bengioy/papers/YB-tricks.pdf
+## yb tricks 
+http://www.iro.umontreal.ca/~bengioy/papers/YB-tricks.pdf
 
-# survey:http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf
+## survey
+http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf
 
-# geofrrey hinton's cousera course: https://class.coursera.org/neuralnets-2012-001/lecture
+## geofrrey hinton's cousera course
+https://class.coursera.org/neuralnets-2012-001/lecture
 
-# socher tutorial @NAACL'13
+## socher tutorial @NAACL'13
 http://www.socher.org/index.php/DeepLearningTutorial/DeepLearningTutorial
 http://nlp.stanford.edu/courses/NAACL2013/
 
-# ufldl wiki (andrew ng class)
+## ufldl wiki (andrew ng class)
 http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Tutorial
 http://www.stanford.edu/class/cs294a/info.html
 
-# Geoff Hinton's reading list (all papers)
+## Geoff Hinton's reading list (all papers)
 http://www.cs.toronto.edu/~hinton/deeprefs.html
 
-# Theano pdf tutorial http://deeplearning.net/tutorial/deeplearning.pdf
+## Theano pdf tutorial 
+http://deeplearning.net/tutorial/deeplearning.pdf
