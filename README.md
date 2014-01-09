@@ -1,7 +1,7 @@
 Deep Learning Resources
 =================
 
-== Stanford CS224N PA4 (Deep Learning Sequence Model)
+# Stanford CS224N PA4 (Deep Learning Sequence Model)
 
 http://nlp.stanford.edu/courses/NAACL2013/
 
@@ -20,3 +20,23 @@ Video1: http://techtalks.tv/talks/deep-learning-for-nlp-without-magic-part-1/584
 Video2: http://techtalks.tv/talks/deep-learning-for-nlp-without-magic-part-2/58415/
 
 The same tutorial was also on youtube (lower quality): http://www.youtube.com/watch?v=IF5tGEgRCTQ
+
+
+# yb tricks: http://www.iro.umontreal.ca/~bengioy/papers/YB-tricks.pdf
+
+# survey:http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf
+
+# geofrrey hinton's cousera course: https://class.coursera.org/neuralnets-2012-001/lecture
+
+# socher tutorial @NAACL'13
+http://www.socher.org/index.php/DeepLearningTutorial/DeepLearningTutorial
+http://nlp.stanford.edu/courses/NAACL2013/
+
+# ufldl wiki (andrew ng class)
+http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Tutorial
+http://www.stanford.edu/class/cs294a/info.html
+
+# Geoff Hinton's reading list (all papers)
+http://www.cs.toronto.edu/~hinton/deeprefs.html
+
+# Theano pdf tutorial http://deeplearning.net/tutorial/deeplearning.pdf
