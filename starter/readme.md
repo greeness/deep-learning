@@ -1,3 +1,5 @@
+My attempt for the [autoencoder exercise](http://deeplearning.stanford.edu/wiki/index.php/Exercise:Sparse_Autoencoder).
+
 ### Play with the dataset first (ipython nodebook and octave)
 
 http://nbviewer.ipython.org/gist/greeness/8346181

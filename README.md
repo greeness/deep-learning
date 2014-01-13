@@ -36,8 +36,9 @@ http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf
 * http://nlp.stanford.edu/courses/NAACL2013/
 
 ## UFLDL wiki (Andrew Ng's class)
-* http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Tutorial
-* http://www.stanford.edu/class/cs294a/info.html
+* [UFLDL Wiki](http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Tutorial)
+* [cs294a course website](http://www.stanford.edu/class/cs294a/info.html)
+* [Recommended Readings](http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Recommended_Readings)
 
 ## Geoff Hinton's reading list (all papers)
 http://www.cs.toronto.edu/~hinton/deeprefs.html
