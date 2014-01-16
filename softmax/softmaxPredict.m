@@ -9,19 +9,27 @@ function [pred] = softmaxPredict(softmaxModel, data)
  
 % Unroll the parameters from theta
 theta = softmaxModel.optTheta;  % this provides a numClasses x inputSize matrix
-pred = zeros(1, size(data, 2));
+
+numCases = size(data, 2);
+pred = zeros(1, numCases);
+
+numClasses = size(theta, 1);
+
 
 %% ---------- YOUR CODE HERE --------------------------------------
 %  Instructions: Compute pred using theta assuming that the labels start 
 %                from 1.
 
+M = theta * data;
 
+M = bsxfun(@minus, M, max(M, [], 1));
 
+expM = exp(M);
 
+% normalized class probabilities
+h = expM ./ repmat(sum(expM, 1), numClasses, 1);
 
-
-
-
+[predValue, pred] = max(h);
 % ---------------------------------------------------------------------
 
 end

@@ -23,16 +23,24 @@ thetagrad = zeros(numClasses, inputSize);
 %                You need to compute thetagrad and cost.
 %                The groundTruth matrix might come in handy.
 
+% theta is a k x n matrix:
+% - where k is the number of classes, in this case, 10 classes
+% - and n is the number of features, in our non-debug version n = 28*28 =
+% 784
+% data is a n x m matrix where m is the number of training examples
+% - So the j-th row of theta is the parameters for class j;
+% - the i-th column of data is the features of the i-th training exmaple
+M = theta * data;
 
+M = bsxfun(@minus, M, max(M, [], 1));
 
+expM = exp(M);
 
+% normalized class probabilities
+h = expM ./ repmat(sum(expM, 1), numClasses, 1);
 
-
-
-
-
-
-
+cost = -sum(sum(groundTruth .* log(h))) / numCases;
+thetagrad = (data * (groundTruth-h)')' ./ (-numCases);
 
 % ------------------------------------------------------------------
 % Unroll the gradient matrices into a vector for minFunc
