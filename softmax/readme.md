@@ -16,6 +16,7 @@ Note:
 We add the path to `minFunc` in `softmaxExercise.m`:
 
 ```matlab
-addpath('/Users/greeness/dataset/ufldl/minFunc');```
+addpath('/Users/greeness/dataset/ufldl/minFunc');
+```
 
 You might want to modify the line if your `minFunc` is located elsewhere.
