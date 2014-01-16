@@ -31,8 +31,8 @@ maxIter = 400;
 %  change it.
 
 % Load MNIST database files
-mnistData   = loadMNISTImages('mnist/train-images-idx3-ubyte');
-mnistLabels = loadMNISTLabels('mnist/train-labels-idx1-ubyte');
+mnistData   = loadMNISTImages('../softmax/mnist/train-images-idx3-ubyte');
+mnistLabels = loadMNISTLabels('../softmax/mnist/train-labels-idx1-ubyte');
 
 % Set Unlabeled Set (All Images)
 
@@ -63,20 +63,30 @@ fprintf('# examples in supervised testing set: %d\n\n', size(testData, 2));
 %  images. 
 
 %  Randomly initialize the parameters
+addpath('../starter/');
 theta = initializeParameters(hiddenSize, inputSize);
 
 %% ----------------- YOUR CODE HERE ----------------------
 %  Find opttheta by running the sparse autoencoder on
 %  unlabeledTrainingImages
-
 opttheta = theta; 
 
+%[cost, grad] = sparseAutoencoderCost(theta, inputSize, hiddenSize, lambda, ...
+                                     %sparsityParam, beta, trainData);
+options.Method = 'lbfgs'; % Here, we use L-BFGS to optimize our cost
+                          % function. Generally, for minFunc to work, you
+                          % need a function pointer with two outputs: the
+                          % function value and the gradient. In our problem,
+                          % sparseAutoencoderCost.m satisfies this.
+options.maxIter = maxIter;          % Maximum number of iterations of L-BFGS to run 
+options.display = 'on';
 
 
-
-
-
-
+[opttheta, cost] = minFunc(@(p) sparseAutoencoderCost(p, ...
+                                   inputSize, hiddenSize, ...
+                                   lambda, sparsityParam, ...
+                                   beta, trainData), ...
+                           theta, options);
 
 
 %% -----------------------------------------------------
@@ -96,11 +106,12 @@ trainFeatures = feedForwardAutoencoder(opttheta, hiddenSize, inputSize, ...
 
 testFeatures = feedForwardAutoencoder(opttheta, hiddenSize, inputSize, ...
                                        testData);
+                                   
 
 %%======================================================================
 %% STEP 4: Train the softmax classifier
 
-softmaxModel = struct;  
+softmaxModel = struct;
 %% ----------------- YOUR CODE HERE ----------------------
 %  Use softmaxTrain.m from the previous exercise to train a multi-class
 %  classifier. 
@@ -110,14 +121,13 @@ softmaxModel = struct;
 % You need to compute softmaxModel using softmaxTrain on trainFeatures and
 % trainLabels
 
+addpath('../softmax/');
+options.maxIter = 500;
+numClasses = 5; % digits 5 to 9
 
-
-
-
-
-
-
-
+lambda = 1e-4;
+softmaxModel = softmaxTrain(hiddenSize, numClasses, lambda, ...
+                            trainFeatures, trainLabels, options);
 
 %% -----------------------------------------------------
 
@@ -129,19 +139,7 @@ softmaxModel = struct;
 % Compute Predictions on the test set (testFeatures) using softmaxPredict
 % and softmaxModel
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+[pred] = softmaxPredict(softmaxModel, testFeatures);
 
 %% -----------------------------------------------------
 

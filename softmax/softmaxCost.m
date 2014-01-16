@@ -39,8 +39,8 @@ expM = exp(M);
 % normalized class probabilities
 h = expM ./ repmat(sum(expM, 1), numClasses, 1);
 
-cost = -sum(sum(groundTruth .* log(h))) / numCases;
-thetagrad = (data * (groundTruth-h)')' ./ (-numCases);
+cost = -sum(sum(groundTruth .* log(h))) / numCases + 0.5 * lambda * sum(sum(theta.^2));
+thetagrad = (data * (groundTruth-h)')' ./ (-numCases) + lambda * theta;
 
 % ------------------------------------------------------------------
 % Unroll the gradient matrices into a vector for minFunc
