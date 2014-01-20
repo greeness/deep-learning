@@ -2,6 +2,8 @@ function patches = sampleIMAGES()
 % sampleIMAGES
 % Returns 10000 patches for training
 
+addpath ../dataset/starter
+
 load IMAGES;    % load images from disk 
 
 patchsize = 8;  % we'll use 8x8 patches 

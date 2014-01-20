@@ -14,6 +14,12 @@
 %  change the code in this file. 
 %
 %%======================================================================
+
+addpath ../softmax
+addpath ../starter
+addpath ../self_taught
+addpath ../minFunc
+
 %% STEP 0: Here we provide the relevant parameters values that will
 %  allow your sparse autoencoder to get good filters; you do not need to 
 %  change the parameters below.
@@ -29,18 +35,21 @@ lambda = 3e-3;         % weight decay parameter
 beta = 3;              % weight of sparsity penalty term       
 
 %%======================================================================
-%% STEP 1: Load data from the MNIST database
+%% STEP 0.5: Load data from the MNIST database
 %
 %  This loads our training data from the MNIST database files.
 
 % Load MNIST database files
-trainData = loadMNISTImages('mnist/train-images-idx3-ubyte');
-trainLabels = loadMNISTLabels('mnist/train-labels-idx1-ubyte');
+trainData = loadMNISTImages('../dataset/mnist/train-images-idx3-ubyte');
+trainLabels = loadMNISTLabels('../dataset/mnist/train-labels-idx1-ubyte');
 
 trainLabels(trainLabels == 0) = 10; % Remap 0 to 10 since our labels need to start from 1
+% Output Some Statistics
+fprintf('# examples in supervised training set: %d\n\n', size(trainData, 2));
 
+pause;
 %%======================================================================
-%% STEP 2: Train the first sparse autoencoder
+%% STEP 1: Train the first sparse autoencoder
 %  This trains the first sparse autoencoder on the unlabelled STL training
 %  images.
 %  If you've correctly implemented sparseAutoencoderCost.m, you don't need
@@ -55,20 +64,26 @@ sae1Theta = initializeParameters(hiddenSizeL1, inputSize);
 %                an hidden size of "hiddenSizeL1"
 %                You should store the optimal parameters in sae1OptTheta
 
+options.Method = 'lbfgs'; % Here, we use L-BFGS to optimize our cost
+                          % function. Generally, for minFunc to work, you
+                          % need a function pointer with two outputs: the
+                          % function value and the gradient. In our problem,
+                          % sparseAutoencoderCost.m satisfies this.
+options.maxIter = 400;    % Maximum number of iterations of L-BFGS to run 
+options.display = 'on';
 
 
+[sae1OptTheta, costL1] = minFunc(@(p) sparseAutoencoderCost(p, ...
+                                   inputSize, hiddenSizeL1, ...
+                                   lambda, sparsityParam, ...
+                                   beta, trainData), ...
+                           sae1Theta, options);
 
+% Visualize weights
 
-
-
-
-
-
-
-
-
-
-
+W1L1 = reshape(sae1OptTheta(1:hiddenSizeL1 * inputSize), hiddenSizeL1, inputSize);
+display_network(W1L1');
+pause;
 % -------------------------------------------------------------------------
 
 
@@ -92,18 +107,12 @@ sae2Theta = initializeParameters(hiddenSizeL2, hiddenSizeL1);
 %                "hiddenSizeL1"
 %
 %                You should store the optimal parameters in sae2OptTheta
-
-
-
-
-
-
-
-
-
-
-
-
+[sae2OptTheta, costL2] = minFunc(@(p) sparseAutoencoderCost(p, ...
+                                   hiddenSizeL1, hiddenSizeL2, ...
+                                   lambda, sparsityParam, ...
+                                   beta, sae1Features), ...
+                           sae2Theta, options);
+W1L2 = reshape(opttheta(1:hiddenSizeL2 * hiddenSizeL1), hiddenSizeL2, hiddenSizeL1);
 
 % -------------------------------------------------------------------------
 
@@ -131,22 +140,19 @@ saeSoftmaxTheta = 0.005 * randn(hiddenSizeL2 * numClasses, 1);
 %  NOTE: If you used softmaxTrain to complete this part of the exercise,
 %        set saeSoftmaxOptTheta = softmaxModel.optTheta(:);
 
+options.maxIter = 500;
 
+lambda = 1e-4;
+softmaxModel = softmaxTrain(hiddenSizeL2, numClasses, lambda, ...
+                            sae2Features, trainLabels, options);
 
-
-
-
-
-
-
-
-
+saeSoftmaxOptTheta = softmaxModel.optTheta(:);
 % -------------------------------------------------------------------------
 
 
 
 %%======================================================================
-%% STEP 5: Finetune softmax model
+%% STEP 4: Finetune softmax model
 
 % Implement the stackedAECost to give the combined cost of the whole model
 % then run this cell.
@@ -171,20 +177,14 @@ stackedAETheta = [ saeSoftmaxOptTheta ; stackparams ];
 %
 %
 
+checkStackedAECost();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+[stackedAeOptTheta, cost] = minFunc(@(p) stackedAECost(p, ...
+                                      inputSize, hiddenSizeL2, ...
+                                      numClasses, netconfig, ...
+                                      lambda, trainData, trainLabels), ...
+                              stackedAETheta, options);
 
 
 % -------------------------------------------------------------------------
@@ -199,8 +199,8 @@ stackedAETheta = [ saeSoftmaxOptTheta ; stackparams ];
 
 % Get labelled test images
 % Note that we apply the same kind of preprocessing as the training set
-testData = loadMNISTImages('mnist/t10k-images-idx3-ubyte');
-testLabels = loadMNISTLabels('mnist/t10k-labels-idx1-ubyte');
+testData = loadMNISTImages('../dataset/mnist/t10k-images-idx3-ubyte');
+testLabels = loadMNISTLabels('../dataset/mnist/t10k-labels-idx1-ubyte');
 
 testLabels(testLabels == 0) = 10; % Remap 0 to 10
 

@@ -12,7 +12,8 @@ function [ cost, grad ] = stackedAECost(theta, inputSize, hiddenSize, ...
 % numClasses:  the number of categories
 % netconfig:   the network configuration of the stack
 % lambda:      the weight regularization penalty
-% data: Our matrix containing the training data as columns.  So, data(:,i) is the i-th training example. 
+% data: Our matrix containing the training data as columns.  So, data(:,i) 
+%       is the i-th training example. 
 % labels: A vector containing labels, where labels(i) is the label for the
 % i-th training example
 
@@ -28,6 +29,7 @@ stack = params2stack(theta(hiddenSize*numClasses+1:end), netconfig);
 % You will need to compute the following gradients
 softmaxThetaGrad = zeros(size(softmaxTheta));
 stackgrad = cell(size(stack));
+
 for d = 1:numel(stack)
     stackgrad{d}.w = zeros(size(stack{d}.w));
     stackgrad{d}.b = zeros(size(stack{d}.b));
@@ -36,8 +38,10 @@ end
 cost = 0; % You need to compute this
 
 % You might find these variables useful
-M = size(data, 2);
-groundTruth = full(sparse(labels, 1:M, 1));
+
+% number of examples
+m = size(data, 2);
+groundTruth = full(sparse(labels, 1:m, 1));
 
 
 %% --------------------------- YOUR CODE HERE -----------------------------
@@ -62,18 +66,37 @@ groundTruth = full(sparse(labels, 1:M, 1));
 %
 
 
+% Perform a feedforward pass, computing the activations for layers L1, L2
 
+x = data;
 
+for d = 1:numel(stack)
+    stack{d}.z = stack{d}.w * x + repmat(stack{d}.b, 1, m);
+    stack{d}.a = sigmoid(stack{d}.z);
+    x = stack{d}.a;
+end
 
+% Perfrom a feedforward pass for the output layer
+M = softmaxTheta * stack{numel(stack)}.a;
 
+M = bsxfun(@minus, M, max(M, [], 1));
 
+expM = exp(M);
 
+% normalized class probabilities
+h = expM ./ repmat(sum(expM, 1), numClasses, 1);
 
+cost = -sum(sum(groundTruth .* log(h))) / numCases + ...
+       0.5 * lambda * sum(sum(softmaxTheta.^2));
 
+softmaxThetaGrad = (stack{numel(stack)}.a * (groundTruth-h)')' ./ (-numCases) + lambda * softmaxTheta;
 
+softmaxDelta = 
 
-
-
+% error terms in layers L1, L2
+for d = numel(stack):-1:1
+   
+end
 
 % -------------------------------------------------------------------------
 

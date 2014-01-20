@@ -28,8 +28,8 @@ beta = 3;            % weight of sparsity penalty term
 %  After implementing sampleIMAGES, the display_network command should
 %  display a random sample of 200 patches from the dataset
 
-images = loadMNISTImages('train-images-idx3-ubyte');
-labels = loadMNISTLabels('train-labels-idx1-ubyte');
+images = loadMNISTImages('../dataset/mnist/train-images-idx3-ubyte');
+labels = loadMNISTLabels('../dataset/mnist/train-labels-idx1-ubyte');
 
 patches = images(:, 1:10000);
 display_network(patches(:,randi(size(patches,2),256,1)),8);
@@ -107,7 +107,7 @@ checkNumericalGradient();
 theta = initializeParameters(hiddenSize, visibleSize);
 
 %  Use minFunc to minimize the function
-addpath minFunc/
+addpath ../minFunc/
 options.Method = 'lbfgs'; % Here, we use L-BFGS to optimize our cost
                           % function. Generally, for minFunc to work, you
                           % need a function pointer with two outputs: the

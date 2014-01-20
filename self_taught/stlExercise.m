@@ -8,6 +8,8 @@
 %  You will also need to have implemented sparseAutoencoderCost.m and 
 %  softmaxCost.m from previous exercises.
 %
+addpath('../starter/');
+addpath('../softmax/');
 %% ======================================================================
 %  STEP 0: Here we provide the relevant parameters values that will
 %  allow your sparse autoencoder to get good filters; you do not need to 
@@ -31,8 +33,10 @@ maxIter = 400;
 %  change it.
 
 % Load MNIST database files
-mnistData   = loadMNISTImages('../softmax/mnist/train-images-idx3-ubyte');
-mnistLabels = loadMNISTLabels('../softmax/mnist/train-labels-idx1-ubyte');
+mnistData   = loadMNISTImages('../dataset/mnist/train-images-idx3-ubyte');
+mnistLabels = loadMNISTLabels('../dataset/mnist/train-labels-idx1-ubyte');
+
+pause;
 
 % Set Unlabeled Set (All Images)
 
@@ -63,7 +67,7 @@ fprintf('# examples in supervised testing set: %d\n\n', size(testData, 2));
 %  images. 
 
 %  Randomly initialize the parameters
-addpath('../starter/');
+
 theta = initializeParameters(hiddenSize, inputSize);
 
 %% ----------------- YOUR CODE HERE ----------------------

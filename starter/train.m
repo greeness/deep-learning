@@ -79,17 +79,17 @@ checkNumericalGradient();
 
 % Now we can use it to check your cost function and derivative calculations
 % for the sparse autoencoder.  
-numgrad = computeNumericalGradient( @(x) sparseAutoencoderCost(x, visibleSize, ...
-                                                  hiddenSize, lambda, ...
-                                                  sparsityParam, beta, ...
-                                                  patches), theta);
+%numgrad = computeNumericalGradient( @(x) sparseAutoencoderCost(x, visibleSize, ...
+                                                  %hiddenSize, lambda, ...
+                                                  %sparsityParam, beta, ...
+                                                  %patches), theta);
 
 % Use this to visually compare the gradients side by side
-disp([numgrad grad]); 
+%disp([numgrad grad]); 
 
 % Compare numerically computed gradients with the ones obtained from backpropagation
-diff = norm(numgrad-grad)/norm(numgrad+grad);
-disp(diff); % Should be small. In our implementation, these values are
+%diff = norm(numgrad-grad)/norm(numgrad+grad);
+%disp(diff); % Should be small. In our implementation, these values are
             % usually less than 1e-9.
 
             % When you got this working, Congratulations!!! 
@@ -103,7 +103,7 @@ disp(diff); % Should be small. In our implementation, these values are
 theta = initializeParameters(hiddenSize, visibleSize);
 
 %  Use minFunc to minimize the function
-addpath minFunc/
+addpath ../minFunc/
 options.Method = 'lbfgs'; % Here, we use L-BFGS to optimize our cost
                           % function. Generally, for minFunc to work, you
                           % need a function pointer with two outputs: the
