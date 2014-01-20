@@ -1,5 +1,10 @@
 Deep Learning Resources
 =================
+## UFLDL wiki (Andrew Ng's class)
+* [UFLDL Wiki](http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Tutorial)
+* [cs294a course website](http://www.stanford.edu/class/cs294a/info.html)
+* [Recommended Readings](http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Recommended_Readings)
+
 
 # Stanford CS224N PA4 (Deep Learning Sequence Model)
 
@@ -34,11 +39,6 @@ http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf
 ## Socher tutorial @NAACL'13
 * http://www.socher.org/index.php/DeepLearningTutorial/DeepLearningTutorial
 * http://nlp.stanford.edu/courses/NAACL2013/
-
-## UFLDL wiki (Andrew Ng's class)
-* [UFLDL Wiki](http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Tutorial)
-* [cs294a course website](http://www.stanford.edu/class/cs294a/info.html)
-* [Recommended Readings](http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Recommended_Readings)
 
 ## Geoff Hinton's reading list (all papers)
 http://www.cs.toronto.edu/~hinton/deeprefs.html
