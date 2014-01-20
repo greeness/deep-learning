@@ -14,7 +14,7 @@
 
 imageChannels = 3;     % number of channels (rgb, so 3)
 
-patchDim   = 8;          % patch dimension
+patchDim   = 8;        % patch dimension
 numPatches = 100000;   % number of patches
 
 visibleSize = patchDim * patchDim * imageChannels;  % number of input units 
@@ -41,6 +41,8 @@ epsilon = 0.1;	       % epsilon for ZCA whitening
 
 % To speed up gradient checking, we will use a reduced network and some
 % dummy patches
+
+addpath ../starter
 
 debugHiddenSize = 5;
 debugvisibleSize = 8;
@@ -79,7 +81,7 @@ assert(diff < 1e-9, 'Difference too large. Check your gradient computation again
 %  In this step, we load 100k patches sampled from the STL10 dataset and
 %  visualize them. Note that these patches have been scaled to [0,1]
 
-load stlSampledPatches.mat
+load ../dataset/stl-10/stlSampledPatches.mat
 
 displayColorNetwork(patches(:, 1:100));
 

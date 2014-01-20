@@ -125,7 +125,6 @@ softmaxModel = struct;
 % You need to compute softmaxModel using softmaxTrain on trainFeatures and
 % trainLabels
 
-addpath('../softmax/');
 options.maxIter = 500;
 numClasses = 5; % digits 5 to 9
 
