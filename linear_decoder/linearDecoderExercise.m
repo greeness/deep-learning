@@ -114,7 +114,7 @@ displayColorNetwork(patches(:, 1:100));
 theta = initializeParameters(hiddenSize, visibleSize);
 
 % Use minFunc to minimize the function
-addpath minFunc/
+addpath ../minFunc/
 
 options = struct;
 options.Method = 'lbfgs'; 
@@ -130,7 +130,7 @@ options.display = 'on';
 % Save the learned features and the preprocessing matrices for use in 
 % the later exercise on convolution and pooling
 fprintf('Saving learned features and preprocessing matrices...\n');                          
-save('STL10Features.mat', 'optTheta', 'ZCAWhite', 'meanPatch');
+save('../dataset/stl-10/STL10Features.mat', 'optTheta', 'ZCAWhite', 'meanPatch');
 fprintf('Saved\n');
 
 %% STEP 2d: Visualize learned features

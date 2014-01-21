@@ -8,6 +8,10 @@
 %  need to modify cnnConvolve.m and cnnPool.m. You will not need to modify
 %  this file.
 
+addpath ../dataset/stl-10
+addpath ../linear_decoder/
+addpath ../self_taught
+addpath ../softmax
 %%======================================================================
 %% STEP 0: Initialization
 %  Here we initialize some parameters used for the exercise.
@@ -38,11 +42,11 @@ poolDim = 19;          % dimension of pooling region
 % Train the sparse autoencoder and fill the following variables with 
 % the optimal parameters:
 
-optTheta =  zeros(2*hiddenSize*visibleSize+hiddenSize+visibleSize, 1);
-ZCAWhite =  zeros(visibleSize, visibleSize);
-meanPatch = zeros(visibleSize, 1);
+%optTheta =  zeros(2*hiddenSize*visibleSize+hiddenSize+visibleSize, 1);
+%ZCAWhite =  zeros(visibleSize, visibleSize);
+%meanPatch = zeros(visibleSize, 1);
 
-
+load STL10Features
 % --------------------------------------------------------------------
 
 % Display and check to see that the features look good
@@ -77,7 +81,7 @@ convolvedFeatures = cnnConvolve(patchDim, hiddenSize, convImages, W, b, ZCAWhite
 %  provided some code to compare the results of your convolution with
 %  activations from the sparse autoencoder
 
-% For 1000 random points
+% For 1000 random pointsi
 for i = 1:1000    
     featureNum = randi([1, hiddenSize]);
     imageNum = randi([1, 8]);
