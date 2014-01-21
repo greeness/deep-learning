@@ -91,12 +91,9 @@ cost = -sum(sum(groundTruth .* log(h))) / numCases + ...
 
 softmaxThetaGrad = (stack{numel(stack)}.a * (groundTruth-h)')' ./ (-numCases) + lambda * softmaxTheta;
 
-softmaxDelta = 
+softmaxDelta = - theta' * (groundTruth - h) .* (stack{2}.a .* (1 - stack{2}.a));
 
 % error terms in layers L1, L2
-for d = numel(stack):-1:1
-   
-end
 
 % -------------------------------------------------------------------------
 

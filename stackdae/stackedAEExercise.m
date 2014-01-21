@@ -19,6 +19,7 @@ addpath ../softmax
 addpath ../starter
 addpath ../self_taught
 addpath ../minFunc
+addpath ../dataset/mnist
 
 %% STEP 0: Here we provide the relevant parameters values that will
 %  allow your sparse autoencoder to get good filters; you do not need to 
@@ -47,7 +48,6 @@ trainLabels(trainLabels == 0) = 10; % Remap 0 to 10 since our labels need to sta
 % Output Some Statistics
 fprintf('# examples in supervised training set: %d\n\n', size(trainData, 2));
 
-pause;
 %%======================================================================
 %% STEP 1: Train the first sparse autoencoder
 %  This trains the first sparse autoencoder on the unlabelled STL training
@@ -112,7 +112,7 @@ sae2Theta = initializeParameters(hiddenSizeL2, hiddenSizeL1);
                                    lambda, sparsityParam, ...
                                    beta, sae1Features), ...
                            sae2Theta, options);
-W1L2 = reshape(opttheta(1:hiddenSizeL2 * hiddenSizeL1), hiddenSizeL2, hiddenSizeL1);
+W1L2 = reshape(sae2OptTheta(1:hiddenSizeL2 * hiddenSizeL1), hiddenSizeL2, hiddenSizeL1);
 
 % -------------------------------------------------------------------------
 

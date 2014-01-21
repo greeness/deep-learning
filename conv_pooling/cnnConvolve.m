@@ -44,20 +44,22 @@ convolvedFeatures = zeros(numFeatures, numImages, imageDim - patchDim + 1, image
 
 % M is the matrix we will convolve the images with
 M = W * ZCAWhite;
-bias = b - M * meanPatch;
 % --------------------------------------------------------
 
-convolvedFeatures = zeros(numFeatures, numImages, imageDim - patchDim + 1, imageDim - patchDim + 1);
+convDim = imageDim - patchDim + 1;
+convolvedFeatures = zeros(numFeatures, numImages, convDim, convDim);
 for imageNum = 1:numImages
   for featureNum = 1:numFeatures
-
     % convolution of image with feature matrix for each channel
-    convolvedImage = zeros(imageDim - patchDim + 1, imageDim - patchDim + 1);
+    convolvedImage = zeros(convDim, convDim);
     for channel = 1:imageChannels
 
       % Obtain the feature (patchDim x patchDim) needed during the convolution
       % ---- YOUR CODE HERE ----
-      feature = M(featureNum, :);
+      n = patchDim * patchDim;
+      seq = (1 + (channel-1) * n) : (channel * n);
+      feature = M(featureNum, seq);
+      feature = reshape(feature, patchDim, patchDim);
       % ------------------------
 
       % Flip the feature matrix because of the definition of convolution, as explained later
@@ -69,21 +71,16 @@ for imageNum = 1:numImages
       % Convolve "feature" with "im", adding the result to convolvedImage
       % be sure to do a 'valid' convolution
       % ---- YOUR CODE HERE ----
-      convolvedImage = conv2(feature, im);
-      
-      
-      
-      % ------------------------
-
+      conv = conv2(feature, im);
+      convolvedImage = convolvedImage + conv(1:convDim, 1:convDim);
     end
-    
+    % ------------------------
     % Subtract the bias unit (correcting for the mean subtraction as well)
     % Then, apply the sigmoid function to get the hidden activation
     % ---- YOUR CODE HERE ----
+    bias = b(featureNum, 1) - M(featureNum, :) * meanPatch;
     convolvedImage = sigmoid(convolvedImage + bias);    
-    
     % ------------------------
-    
     % The convolved feature is the sum of the convolved values for all channels
     convolvedFeatures(featureNum, imageNum, :, :) = convolvedImage;
   end
