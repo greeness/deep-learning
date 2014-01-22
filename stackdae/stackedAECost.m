@@ -68,16 +68,20 @@ groundTruth = full(sparse(labels, 1:m, 1));
 
 % Perform a feedforward pass, computing the activations for layers L1, L2
 
-x = data;
+%x = data;
 
-for d = 1:numel(stack)
-    stack{d}.z = stack{d}.w * x + repmat(stack{d}.b, 1, m);
-    stack{d}.a = sigmoid(stack{d}.z);
-    x = stack{d}.a;
-end
+%nl = numel(stack);
+%for d = 1:nl
+%    stack{d}.z = stack{d}.w * x + repmat(stack{d}.b, 1, m);
+%    stack{d}.a = sigmoid(stack{d}.z);
+%    x = stack{d}.a;
+%end
+
+stack{1}.a = sigmoid(stack{1}.w * data + repmat(stack{1}.b, 1, m));
+stack{2}.a = sigmoid(stack{2}.w * stack{1}.a + repmat(stack{2}.b, 1, m));
 
 % Perfrom a feedforward pass for the output layer
-M = softmaxTheta * stack{numel(stack)}.a;
+M = softmaxTheta * stack{2}.a;
 
 M = bsxfun(@minus, M, max(M, [], 1));
 
@@ -86,17 +90,21 @@ expM = exp(M);
 % normalized class probabilities
 h = expM ./ repmat(sum(expM, 1), numClasses, 1);
 
-cost = -sum(sum(groundTruth .* log(h))) / numCases + ...
+cost = -sum(sum(groundTruth .* log(h))) / m + ...
        0.5 * lambda * sum(sum(softmaxTheta.^2));
 
-softmaxThetaGrad = (stack{numel(stack)}.a * (groundTruth-h)')' ./ (-numCases) + lambda * softmaxTheta;
+softmaxThetaGrad = -(stack{2}.a * (groundTruth-h)')' ./m + lambda * softmaxTheta;
 
-softmaxDelta = - theta' * (groundTruth - h) .* (stack{2}.a .* (1 - stack{2}.a));
+softmaxDelta = - softmaxTheta' * (groundTruth - h) .* (stack{2}.a .* (1 - stack{2}.a));
 
-% error terms in layers L1, L2
+L2Delta = (stack{2}.w' * softmaxDelta) .* (stack{1}.a .* (1 - stack{1}.a));
 
+stackgrad{2}.w = softmaxDelta * stack{1}.a' ./ m + lambda * stack{2}.w;
+stackgrad{2}.b = mean(softmaxDelta, 2);
+
+stackgrad{1}.w = L2Delta * data' ./ m + lambda * stack{1}.w;
+stackgrad{1}.b = mean(L2Delta, 2);
 % -------------------------------------------------------------------------
-
 %% Roll gradient vector
 grad = [softmaxThetaGrad(:) ; stack2params(stackgrad)];
 

@@ -149,7 +149,7 @@ softmaxModel = softmaxTrain(hiddenSizeL2, numClasses, lambda, ...
 saeSoftmaxOptTheta = softmaxModel.optTheta(:);
 % -------------------------------------------------------------------------
 
-
+pause;
 
 %%======================================================================
 %% STEP 4: Finetune softmax model
@@ -186,7 +186,6 @@ checkStackedAECost();
                                       lambda, trainData, trainLabels), ...
                               stackedAETheta, options);
 
-
 % -------------------------------------------------------------------------
 
 
@@ -210,7 +209,7 @@ testLabels(testLabels == 0) = 10; % Remap 0 to 10
 acc = mean(testLabels(:) == pred(:));
 fprintf('Before Finetuning Test Accuracy: %0.3f%%\n', acc * 100);
 
-[pred] = stackedAEPredict(stackedAEOptTheta, inputSize, hiddenSizeL2, ...
+[pred] = stackedAEPredict(stackedAeOptTheta, inputSize, hiddenSizeL2, ...
                           numClasses, netconfig, testData);
 
 acc = mean(testLabels(:) == pred(:));

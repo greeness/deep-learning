@@ -23,16 +23,25 @@ stack = params2stack(theta(hiddenSize*numClasses+1:end), netconfig);
 %% ---------- YOUR CODE HERE --------------------------------------
 %  Instructions: Compute pred using theta assuming that the labels start 
 %                from 1.
+x = data;
+m = size(data, 2);
 
+nl = numel(stack);
+for d = 1:nl
+    stack{d}.z = stack{d}.w * x + repmat(stack{d}.b, 1, m);
+    stack{d}.a = sigmoid(stack{d}.z);
+    x = stack{d}.a;
+end
 
+% Perfrom a feedforward pass for the output layer
+M = softmaxTheta * stack{nl}.a;
+M = bsxfun(@minus, M, max(M, [], 1));
 
+expM = exp(M);
 
-
-
-
-
-
-
+% normalized class probabilities
+h = expM ./ repmat(sum(expM, 1), numClasses, 1);
+[predValue, pred] = max(h);
 
 % -----------------------------------------------------------
 

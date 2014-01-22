@@ -35,6 +35,32 @@ numgrad = computeNumericalGradient( @(x) stackedAECost(x, inputSize, ...
                                         lambda, data, labels), ...
                                         stackedAETheta);
 
+                                    
+% the first 10 is for softmaxTheta
+%numgrad = numgrad(1:10);
+%grad = grad(1:10);
+% the subsequent parameters are [w1; b1; w2; b2]
+% w1 is 3 x 4
+% b1 is 3 x 1
+% w2 is 5 x 3
+% b2 is 5 x 1
+
+% w1
+numgrad = numgrad(11:22);
+grad = grad(11:22);
+
+% b1 is correct
+%numgrad = numgrad(23:25);
+%grad = grad(23:25);
+
+%numgrad = numgrad(26:40);
+%grad = grad(26:40);
+
+% b2 is correct
+%numgrad = numgrad(41:45);
+%grad = grad(41:45);
+
+%size(numgrad), size(grad)
 % Use this to visually compare the gradients side by side
 disp([numgrad grad]); 
 
