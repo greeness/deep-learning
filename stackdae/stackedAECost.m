@@ -99,10 +99,14 @@ softmaxDelta = - softmaxTheta' * (groundTruth - h) .* (stack{2}.a .* (1 - stack{
 
 L2Delta = (stack{2}.w' * softmaxDelta) .* (stack{1}.a .* (1 - stack{1}.a));
 
-stackgrad{2}.w = softmaxDelta * stack{1}.a' ./ m + lambda * stack{2}.w;
+% Note should not include the decay term here. Because in the fine tuning,
+% our current cost function only have lambda in the `softmaxTheta` term.
+% Thus when taking derivative w.r.t W, the lambda never appears in the 
+% result.
+stackgrad{2}.w = softmaxDelta * stack{1}.a' ./ m; % + lambda * stack{2}.w;
 stackgrad{2}.b = mean(softmaxDelta, 2);
 
-stackgrad{1}.w = L2Delta * data' ./ m + lambda * stack{1}.w;
+stackgrad{1}.w = L2Delta * data' ./ m; %+ lambda * stack{1}.w;
 stackgrad{1}.b = mean(L2Delta, 2);
 % -------------------------------------------------------------------------
 %% Roll gradient vector

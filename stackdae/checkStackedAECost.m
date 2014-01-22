@@ -46,8 +46,8 @@ numgrad = computeNumericalGradient( @(x) stackedAECost(x, inputSize, ...
 % b2 is 5 x 1
 
 % w1
-numgrad = numgrad(11:22);
-grad = grad(11:22);
+%numgrad = numgrad(11:22);
+%grad = grad(11:22);
 
 % b1 is correct
 %numgrad = numgrad(23:25);
