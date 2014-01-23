@@ -1,6 +1,6 @@
 Deep Learning Resources
 =================
-## UFLDL wiki (Andrew Ng's class)
+# UFLDL wiki (Andrew Ng's class)
 * [UFLDL Wiki](http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Tutorial)
 * [cs294a course website](http://www.stanford.edu/class/cs294a/info.html)
 * [Recommended Readings](http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Recommended_Readings)
@@ -27,21 +27,11 @@ The topic was covered in the above NAACL 2013 Presentation.
 The same tutorial was also on youtube (lower quality): http://www.youtube.com/watch?v=IF5tGEgRCTQ
 
 
-## Training tricks 
-http://www.iro.umontreal.ca/~bengioy/papers/YB-tricks.pdf
+# Other ...
 
-## Survey
-http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf
-
-## Geoff Hinton's cousera course
-* https://class.coursera.org/neuralnets-2012-001/lecture
-
-## Socher tutorial @NAACL'13
-* http://www.socher.org/index.php/DeepLearningTutorial/DeepLearningTutorial
-* http://nlp.stanford.edu/courses/NAACL2013/
-
-## Geoff Hinton's reading list (all papers)
-http://www.cs.toronto.edu/~hinton/deeprefs.html
-
-## Theano pdf tutorial 
-http://deeplearning.net/tutorial/deeplearning.pdf
+* [Training tricks by YB](http://www.iro.umontreal.ca/~bengioy/papers/YB-tricks.pdf)
+* [Survey paper](http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf)
+* [Geoff Hinton's cousera course](https://class.coursera.org/neuralnets-2012-001/lecture)
+* Socher tutorial @NAACL'13. [tutorial](http://www.socher.org/index.php/DeepLearningTutorial/DeepLearningTutorial), [naacl2013](http://nlp.stanford.edu/courses/NAACL2013/)
+* [Geoff Hinton's reading list (all papers)](http://www.cs.toronto.edu/~hinton/deeprefs.html)
+* [Theano pdf tutorial](http://deeplearning.net/tutorial/deeplearning.pdf)
