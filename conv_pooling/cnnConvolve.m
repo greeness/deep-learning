@@ -71,8 +71,8 @@ for imageNum = 1:numImages
       % Convolve "feature" with "im", adding the result to convolvedImage
       % be sure to do a 'valid' convolution
       % ---- YOUR CODE HERE ----
-      conv = conv2(feature, im);
-      convolvedImage = convolvedImage + conv(1:convDim, 1:convDim);
+      conv = conv2(feature, im, shape='valid');
+      convolvedImage = convolvedImage + conv;
     end
     % ------------------------
     % Subtract the bias unit (correcting for the mean subtraction as well)
