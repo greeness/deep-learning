@@ -48,6 +48,8 @@ M = W * ZCAWhite;
 
 convDim = imageDim - patchDim + 1;
 convolvedFeatures = zeros(numFeatures, numImages, convDim, convDim);
+
+n = patchDim * patchDim;
 for imageNum = 1:numImages
   for featureNum = 1:numFeatures
     % convolution of image with feature matrix for each channel
@@ -56,9 +58,7 @@ for imageNum = 1:numImages
 
       % Obtain the feature (patchDim x patchDim) needed during the convolution
       % ---- YOUR CODE HERE ----
-      n = patchDim * patchDim;
-      seq = (1 + (channel-1) * n) : (channel * n);
-      feature = M(featureNum, seq);
+      feature = M(featureNum, (1 + (channel-1) * n) : (channel * n));
       feature = reshape(feature, patchDim, patchDim);
       % ------------------------
 

@@ -138,8 +138,6 @@ else
     disp('Congratulations! Your pooling code passed the test.');
 end
 
-pause;
-
 %%======================================================================
 %% STEP 3: Convolve and pool with the dataset
 %  In this step, you will convolve each of the features you learned with
