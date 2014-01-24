@@ -12,6 +12,7 @@ addpath ../dataset/stl-10
 addpath ../linear_decoder/
 addpath ../self_taught
 addpath ../softmax
+addpath ../minFunc
 %%======================================================================
 %% STEP 0: Initialization
 %  Here we initialize some parameters used for the exercise.
