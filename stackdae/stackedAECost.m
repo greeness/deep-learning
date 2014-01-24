@@ -91,7 +91,7 @@ expM = exp(M);
 h = expM ./ repmat(sum(expM, 1), numClasses, 1);
 
 cost = -sum(sum(groundTruth .* log(h))) / m + ...
-       0.5 * lambda * sum(sum(softmaxTheta.^2));
+       0.5 * lambda * sum(sum(softmaxTheta.^2)) + 0.5 * lambda * (sum(sum(stack{1}.w.^2)) + sum(sum(stack{2}.w.^2)));
 
 softmaxThetaGrad = -(stack{2}.a * (groundTruth-h)')' ./m + lambda * softmaxTheta;
 
@@ -99,14 +99,14 @@ softmaxDelta = - softmaxTheta' * (groundTruth - h) .* (stack{2}.a .* (1 - stack{
 
 L2Delta = (stack{2}.w' * softmaxDelta) .* (stack{1}.a .* (1 - stack{1}.a));
 
-% Note should not include the decay term here. Because in the fine tuning,
-% our current cost function only have lambda in the `softmaxTheta` term.
-% Thus when taking derivative w.r.t W, the lambda never appears in the 
-% result.
-stackgrad{2}.w = softmaxDelta * stack{1}.a' ./ m; % + lambda * stack{2}.w;
+% Note should not include the decay term below if the cost function does not
+% contain the corresponding decay terms. Because if our cost function only 
+% has lambda in the `softmaxTheta` term, when taking derivative w.r.t W, the 
+% lambda never appears in the result.
+stackgrad{2}.w = softmaxDelta * stack{1}.a' ./ m + lambda * stack{2}.w;
 stackgrad{2}.b = mean(softmaxDelta, 2);
 
-stackgrad{1}.w = L2Delta * data' ./ m; %+ lambda * stack{1}.w;
+stackgrad{1}.w = L2Delta * data' ./ m + lambda * stack{1}.w;
 stackgrad{1}.b = mean(L2Delta, 2);
 % -------------------------------------------------------------------------
 %% Roll gradient vector
