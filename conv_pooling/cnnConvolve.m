@@ -71,7 +71,8 @@ for imageNum = 1:numImages
       % Convolve "feature" with "im", adding the result to convolvedImage
       % be sure to do a 'valid' convolution
       % ---- YOUR CODE HERE ----
-      conv = conv2(feature, im, shape='valid');
+      conv = conv2(im, feature, 'valid');
+      % sum of all channels 
       convolvedImage = convolvedImage + conv;
     end
     % ------------------------

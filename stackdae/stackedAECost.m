@@ -91,7 +91,8 @@ expM = exp(M);
 h = expM ./ repmat(sum(expM, 1), numClasses, 1);
 
 cost = -sum(sum(groundTruth .* log(h))) / m + ...
-       0.5 * lambda * sum(sum(softmaxTheta.^2)) + 0.5 * lambda * (sum(sum(stack{1}.w.^2)) + sum(sum(stack{2}.w.^2)));
+       0.5 * lambda * sum(sum(softmaxTheta.^2)) + ...
+       0.5 * lambda * (sum(sum(stack{1}.w.^2)) + sum(sum(stack{2}.w.^2)));
 
 softmaxThetaGrad = -(stack{2}.a * (groundTruth-h)')' ./m + lambda * softmaxTheta;
 

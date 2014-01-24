@@ -104,13 +104,13 @@ for i = 1:1000
         fprintf('Image Column      : %d\n', imageCol);
         fprintf('Convolved feature : %0.5f\n', convolvedFeatures(featureNum, imageNum, imageRow, imageCol));
         fprintf('Sparse AE feature : %0.5f\n', features(featureNum, 1));       
-        %error('Convolved feature does not match activation from autoencoder');
+        error('Convolved feature does not match activation from autoencoder');
     end 
 end
 
 disp('Congratulations! Your convolution code passed the test.');
 
-%pause;
+pause;
 
 %% STEP 2c: Implement pooling
 %  Implement pooling in the function cnnPool in cnnPool.m
