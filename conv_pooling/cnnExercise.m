@@ -114,7 +114,7 @@ disp('Congratulations! Your convolution code passed the test.');
 %  Implement pooling in the function cnnPool in cnnPool.m
 
 % NOTE: Implement cnnPool in cnnPool.m first!
-pooledFeatures = cnnPool(poolDim, convolvedFeatures);
+%pooledFeatures = cnnPool(poolDim, convolvedFeatures);
 
 %% STEP 2d: Checking your pooling
 %  To ensure that you have implemented pooling, we will use your pooling
@@ -155,6 +155,7 @@ assert(mod(hiddenSize, stepSize) == 0, 'stepSize should divide hiddenSize');
 load stlTrainSubset.mat % loads numTrainImages, trainImages, trainLabels
 load stlTestSubset.mat  % loads numTestImages,  testImages,  testLabels
 
+
 pooledFeaturesTrain = zeros(hiddenSize, numTrainImages, ...
     floor((imageDim - patchDim + 1) / poolDim), ...
     floor((imageDim - patchDim + 1) / poolDim) );
@@ -191,7 +192,6 @@ for convPart = 1:(hiddenSize / stepSize)
     clear convolvedFeaturesThis pooledFeaturesThis;
 
 end
-
 
 % You might want to save the pooled features since convolution and pooling takes a long time
 save('cnnPooledFeatures.mat', 'pooledFeaturesTrain', 'pooledFeaturesTest');
