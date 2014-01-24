@@ -110,8 +110,6 @@ end
 
 disp('Congratulations! Your convolution code passed the test.');
 
-pause;
-
 %% STEP 2c: Implement pooling
 %  Implement pooling in the function cnnPool in cnnPool.m
 
@@ -139,6 +137,8 @@ if ~isequal(pooledFeatures, expectedMatrix)
 else
     disp('Congratulations! Your pooling code passed the test.');
 end
+
+pause;
 
 %%======================================================================
 %% STEP 3: Convolve and pool with the dataset
